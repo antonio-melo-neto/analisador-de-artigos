@@ -16,6 +16,15 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.02);
 }
 
+/* Estilo do título da Tabela 2 */
+.table-qualis-title {
+  font-family: 'Sora', sans-serif; /* Define a fonte */
+  color: #282828; /* Cor escura para melhor contraste */
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* Estilo do container de Pontuação */
 .pontuacao-container {
   margin-left: 10px;
