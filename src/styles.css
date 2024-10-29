@@ -296,9 +296,10 @@
  
 /* Estilo de input editável */
 .input-editable {
-  width: 18px;
-  padding: 3px;
-  font-size: 12px;
+  width: 20px;
+  height:20px;
+  padding: 0px;
+  font-size: 15px;
   text-align: center;
 }
 
