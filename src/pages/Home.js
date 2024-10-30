@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import api from '../services/api';
 import '../styles.css';
 import '../tabela2.css';
+import axios from 'axios';
 
 function Home() {
   const [file, setFile] = useState(null);
@@ -20,6 +21,10 @@ function Home() {
     const saved = localStorage.getItem('savedData');
     return saved ? JSON.parse(saved) : [];
   });
+
+const api = axios.create({
+    baseURL: 'http://127.0.0.1:8000' // Apontando para o backend local
+});
 
 const [uploading, setUploading] = useState(false); // Indica se estamos realizando upload
 const [originalData, setOriginalData] = useState([]); // Armazena os dados originais do upload
@@ -647,3 +652,4 @@ const handleResetAll = () => {
 }
 
 export default Home;
+
