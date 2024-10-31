@@ -125,6 +125,10 @@ useEffect(() => {
     }
 }, []);
 
+useEffect(() => {
+  console.log('NODE_ENV:', process.env.NODE_ENV); // Adicione aqui
+}, []);
+
 // useEffect para reaplicar o filtro quando os anos ou dados principais mudam
 useEffect(() => {
     aplicarFiltroAnos();
