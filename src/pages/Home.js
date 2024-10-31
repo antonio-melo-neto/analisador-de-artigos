@@ -44,6 +44,14 @@ const handleUpload = async () => {
 
     try {
         const response = await api.post('/upload/', formData);
+        
+        // Verifique se a resposta é bem-sucedida
+        if (!response || response.status !== 200) {
+            console.error('Erro na resposta do servidor:', response);
+            alert('Erro ao enviar o arquivo. Verifique a resposta do servidor.');
+            return;
+        }
+
         const { nomePessoa, artigos, pontuacaoQualis } = response.data;
         setNomePessoa(nomePessoa);
 
@@ -68,7 +76,15 @@ const handleUpload = async () => {
         setFile(null); // Limpa o input de arquivo para permitir novo upload
         alert('Arquivo enviado com sucesso!');
     } catch (error) {
-        console.error('Erro ao enviar o arquivo:', error);
+        // Verifique detalhes do erro
+        if (error.response) {
+            console.error('Erro na resposta:', error.response);
+            console.error('Detalhes do erro:', error.response.data);
+        } else if (error.request) {
+            console.error('Nenhuma resposta recebida:', error.request);
+        } else {
+            console.error('Erro ao configurar a requisição:', error.message);
+        }
         alert('Erro ao enviar o arquivo.');
     } finally {
         setUploading(false); // Conclui o upload
