@@ -326,6 +326,29 @@ const handleResetAll = () => {
       pdf.save(`${nomeDocente} - Relatório de Pontuação PPGEC.pdf`);
     });
   };
+  
+const handleGenerateCSV = async () => {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/generate-csv/?nomePessoa=${encodeURIComponent(nomePessoa)}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(pontuacaoQualis), // Envia apenas os dados da Tabela 2 no corpo
+        });
+        
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `${nomePessoa}_curriculo.csv`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+    } catch (error) {
+        console.error("Erro ao gerar o arquivo CSV:", error);
+    }
+};
 
   return (
     <Container
@@ -645,6 +668,16 @@ const handleResetAll = () => {
 		  >
 			Resetar Tudo
 			</Button>
+			
+			<Button
+			  variant="contained"
+			  color="primary"
+			  onClick={handleGenerateCSV}
+			  style={{ marginLeft: '10px' }}
+>
+			Gerar CSV
+			</Button>
+
         </div>
       </div>
     </Container>
