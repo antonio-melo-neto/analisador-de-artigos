@@ -7,6 +7,9 @@ import axios from 'axios';
 import '../styles.css';
 import '../tabela2.css';
 
+// Adicione este console.log para verificar a variável de ambiente
+console.log('REACT_APP_BACKEND_URL:', process.env.REACT_APP_BACKEND_URL);
+
 function Home() {
   const [file, setFile] = useState(null);
   const [data, setData] = useState([]);
@@ -24,8 +27,8 @@ function Home() {
   const [originalData, setOriginalData] = useState([]);
 
   const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000' // Apontando para o backend local
-  });
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000'  // Usa a variável de ambiente em produção, fallback para local
+});
 
   const handleUpload = async () => {
     if (!file) {
