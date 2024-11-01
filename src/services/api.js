@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production'
-    ? 'https://analisador-backend-2.onrender.com' // URL do backend em produção
-    : 'http://127.0.0.1:8000',                  // URL local para desenvolvimento
+  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000'  // Padrão local
 });
 
 export default api;
